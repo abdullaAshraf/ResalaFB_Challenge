@@ -5,7 +5,7 @@ dataclasses==0.6
 Django==2.1.1
 django-cors-headers==2.4.0
 django-sendgrid-v5==0.6.893
-djangorestframework==3.8.2
+djangorestframework==3.9.1
 djangorestframework-jwt==1.11.0
 djongo==1.2.30
 future==0.16.0
