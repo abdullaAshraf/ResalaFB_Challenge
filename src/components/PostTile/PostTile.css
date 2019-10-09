@@ -1,0 +1,35 @@
+.PostTile {
+    background-color: #FFFFFF;
+    text-align: start;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin: 10px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.PostTile p {
+    color: #757575;
+    font-size: 12px;
+}
+
+.PostTile .Content {
+    color: #303F9F;
+    font-size: 20px;
+    margin: 0px;
+}
+
+.PostTile:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+.PostTile .LinkIcon {
+    float: right;
+    color: #303F9F;
+}
+
+.PostTile .LinkIcon:hover {
+    color: #BDBDBD;
+}
+
+

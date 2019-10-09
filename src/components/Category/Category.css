@@ -1,0 +1,15 @@
+.CategoryActive {
+    color: #303F9F;
+    background-color: #C5CAE9;
+}
+
+.CategoryItem {
+    cursor: pointer;
+    align-content: center;
+    padding: 10px;
+    line-height: 20px;
+}
+
+.CategoryIcon {
+    vertical-align: middle;
+}

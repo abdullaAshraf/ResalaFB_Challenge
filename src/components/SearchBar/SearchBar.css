@@ -1,0 +1,13 @@
+.SearchBar {
+    text-align: start;
+    padding: 10px;
+    margin: 10px;
+}
+
+.SearchBar input{
+    width: 300px;
+}
+
+.SearchIcon{
+    color : #303F9F;
+}

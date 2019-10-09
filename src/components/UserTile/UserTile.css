@@ -1,0 +1,28 @@
+.UserTile {
+ margin: 5px;
+ text-align: start;
+}
+
+.UserTile .Online {
+    color: #4CAF50;
+}
+
+.UserTile .Offline {
+    color: #F44336;
+}
+
+.UserTile .col-1 {
+    padding: 0px 5px;
+}
+
+.UserTile .col-11 {
+    padding: 0px 5px;
+}
+
+
+
+.UserTile .Email {
+    margin: 0px;
+    font-size: 12px;
+    color: #757575;
+}
