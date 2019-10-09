@@ -13,7 +13,7 @@ import axios from 'axios'
 class App extends Component {
   state = {
     currentUser: null,
-    Roles: [new Role('admin', true, true, 0), new Role('moderator', true, false, 1), new Role('volunteer', false, false, 2)],
+    roles: [new Role('admin', true, true, 0), new Role('moderator', true, false, 1), new Role('volunteer', false, false, 2)],
     categories: ['All', 'New', 'Trash', 'Spam'],
     posts: [new Post('https://www.google.com/', 'test post', 'Random', Date.now()),
     new Post('https://www.linkedin.com', 'linkedin', 'Info', Date.now()),
@@ -23,6 +23,7 @@ class App extends Component {
   config
 
   loadData = () => {
+    /*
     axios.get('/Posts/', this.config)
       .then(res => this.setState({ posts: res.data }))
       .catch(err => console.log(err));
@@ -30,7 +31,7 @@ class App extends Component {
     axios.get('/Roles/', this.config)
       .then(res => this.setState({ Roles: res.data }))
       .catch(err => console.log(err));
-
+    */
     let categories = this.state.posts.map(post => post.category).filter(onlyUnique);
     categories.push('All');
     categories.push('New');
@@ -49,7 +50,7 @@ class App extends Component {
     this.setState({ currentUser: user });
     this.config = {
       headers: {
-        Authorization: "JWT " + user.token,
+        //Authorization: "JWT " + user.token,
       }
     }
   }

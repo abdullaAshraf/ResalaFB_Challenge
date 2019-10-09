@@ -99,7 +99,7 @@ class Posts extends Component {
     }
 
     render() {
-
+        console.log(this.state.roles);
         let ViewArea = <PostsArea posts={this.state.curretPosts} openPost={this.openPost} />;
         if (this.state.activePost != null)
             ViewArea = <PostDetails post={this.state.activePost} roles={this.state.roles} exitPost={this.exitPost} deletePost={this.deletePost} addNote={this.addNote} onRolesSelect={this.onRolesSelect} />
