@@ -2,7 +2,7 @@ astroid==2.0.4
 certifi==2018.10.15
 chardet==3.0.4
 dataclasses==0.6
-Django==2.1.1
+Django==2.1.11
 django-cors-headers==2.4.0
 django-sendgrid-v5==0.6.893
 djangorestframework==3.8.2
