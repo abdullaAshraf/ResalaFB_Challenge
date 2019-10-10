@@ -1,3 +1,0 @@
-{% load i18n %}{% autoescape off %}
-{% blocktrans %}disease found on Latitude = {{lat}}, Longitude = {{lang}} {% endblocktrans %}
-{% endautoescape %}

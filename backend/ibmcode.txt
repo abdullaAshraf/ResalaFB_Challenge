@@ -1,9 +1,0 @@
-01b61af596d16f0ddb43b455b73d3d8b
-
-
-button. To apply the
-code, go to the IBM Cloud dashboard and select Manage -> Billing and Usage -> Billing. Go to the
-Feature (Promo) Codes section and apply the code.
-Please Note: applying this code will change your account from a non-expiring Standard account to
-a Trial account that will expire in 180 days, so we only recommend a Trial code only if you need
-additional compute capabilities for your project.

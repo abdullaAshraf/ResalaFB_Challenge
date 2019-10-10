@@ -1,7 +1,0 @@
-applications:
-- name: "akef test ibm"
-  memory: 128MB
-  disk_quota: 256MB
-  random-route: true
-  buildpack: python_buildpack
-  command: bash ./run.sh

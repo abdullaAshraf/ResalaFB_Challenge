@@ -1,1 +1,0 @@
-web: gunicorn resala_challenge.wsgi — workers 2
