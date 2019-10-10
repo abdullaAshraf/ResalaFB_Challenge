@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import Post, Category, Configration
-from .serializers import PostSerializer
+from .serializers import PostSerializer, CategorySerializer
 from .repository import get_group_posts_from_fb
 
 
@@ -46,3 +46,10 @@ class PostViewSet(viewsets.ModelViewSet):
     """
     queryset = Post.objects.all().order_by('-updated_time')
     serializer_class = PostSerializer
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer

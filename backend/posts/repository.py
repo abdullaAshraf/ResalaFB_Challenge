@@ -1,3 +1,8 @@
+import logging
+import os, sys
+sys.path.append(os.path.dirname(sys.path[0]))
+from categorization.predict import predict_category
+
 import time
 import json
 import requests
@@ -9,14 +14,18 @@ from .models import Post, Category, Configration
 from typing import Tuple
 
 
-access_token="EAAHxtOXZA7ZB4BAFYLZCy7bZATUSK0C88O6uydpniLuxwaGoPN0ZBiEFCKGdeufcJd6aZCYJ9gZCDjA005XVND2500wZB5Y86EFKzfp948ZB2FwGabNoyGrNkZCh4KI6TENivUJXkipE3zZBBe3s9N6ptL6BIHYr4JWh1ZBchoopSherlTyJYzyIQ1chfUZB4yYZBsaFwZD"
+access_token="EAAHxtOXZA7ZB4BAMRToqpLAHmibdBY9OFHLbub9ZA9I0eYzhJm0hSHNeUJi8qsTbP9AdDTcooDBrAth9Mi40VZAZAUMh7ZCzI2fttm03Gv3WVtZA6zFs1Rddbh2oNeAHcNqhLpX0HN5sA4IqvjP4lHAUQO4urZAevH9iwRgZBIa9ZA96bxRszmaJsINtZCsl8ic8QQZD"
 group_id="1484691605005106"
 one_day = 60 * 60 * 24
 
 def save_post(post):
+    category = predict_category(post.get("message", ""))
+    category = Category.objects.get(name=category)
+    
     p = Post(
         message=post.get("message", ""), permalink_url=post["permalink_url"],
-        created_time=post["created_time"], updated_time=post["updated_time"]
+        created_time=post["created_time"], updated_time=post["updated_time"],
+        category=category,
     )
     p.save()
 
@@ -45,6 +54,7 @@ def get_group_posts_from_fb() -> Tuple[bool, int]:
         payload = json.loads(response.content)
 
         if not response.status_code == 200:
+            logging.error(payload)
             return False, posts_count
 
         data = payload["data"]
