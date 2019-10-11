@@ -1,6 +1,5 @@
 import logging
-import os, sys
-sys.path.append(os.path.dirname(sys.path[0]))
+import os
 from categorization.predict import predict_category
 
 import time
@@ -14,7 +13,7 @@ from .models import Post, Category, Configration
 from typing import Tuple
 
 
-access_token="EAAHxtOXZA7ZB4BAMRToqpLAHmibdBY9OFHLbub9ZA9I0eYzhJm0hSHNeUJi8qsTbP9AdDTcooDBrAth9Mi40VZAZAUMh7ZCzI2fttm03Gv3WVtZA6zFs1Rddbh2oNeAHcNqhLpX0HN5sA4IqvjP4lHAUQO4urZAevH9iwRgZBIa9ZA96bxRszmaJsINtZCsl8ic8QQZD"
+access_token= os.environ.get("access_token")
 group_id="1484691605005106"
 one_day = 60 * 60 * 24
 
