@@ -32,6 +32,7 @@ class Post(models.Model):
     seen = models.BooleanField(default=False)
     working = models.BooleanField(default=False)
     notes = models.TextField(null=True, blank=True)
+    alt_text = models.CharField(max_length=500, null=True, blank=True)
     assignedRoles = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):

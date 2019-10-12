@@ -24,7 +24,7 @@ def save_post(post):
     p = Post(
         message=post.get("message", ""), permalink_url=post["permalink_url"],
         created_time=post["created_time"], updated_time=post["updated_time"],
-        category=category,
+        category=category, alt_text=post.get("alt_text", "")
     )
     p.save()
 
@@ -38,7 +38,7 @@ def get_group_posts_from_fb() -> Tuple[bool, int]:
     since = int(last_run.value)
     until = int(time.time())
     limit = 5
-    fields="id,message,created_time,updated_time,from,is_hidden,permalink_url"
+    fields="id,message,created_time,updated_time,from,is_hidden,permalink_url,object_id"
 
     posts_count = 0
 
@@ -60,6 +60,14 @@ def get_group_posts_from_fb() -> Tuple[bool, int]:
         posts_count += len(data)
 
         for post in data:
+            if post.get('object_id'):
+                photo_id=post.get('object_id')
+                photo_request_url= (f"https://graph.facebook.com/{photo_id}/?fields=alt_text"
+                    f"&access_token={access_token}")
+                logging.info(f"photo_request_url = {photo_request_url}")
+                response = requests.get(photo_request_url)
+                payload = json.loads(response.content)
+                post["alt_text"] = payload["alt_text"]
             save_post(post)
         
         # get the next page
