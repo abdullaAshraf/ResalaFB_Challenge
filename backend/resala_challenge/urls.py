@@ -25,5 +25,7 @@ urlpatterns = [
     path('posts/', include('posts.urls')),
     path('categories/', include(router.urls)),
     path('roles/', include('roles.urls')),
+    path('users/', include('users.urls')),
+    path('auth/', include('rest_framework_social_oauth2.urls')),
     path('admin/', admin.site.urls),
 ]
