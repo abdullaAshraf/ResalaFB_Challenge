@@ -1,0 +1,2 @@
+web: gunicorn resala_challenge.wsgi
+clock: python clock.py
