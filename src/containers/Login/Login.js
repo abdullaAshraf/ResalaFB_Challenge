@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import { withRouter } from 'react-router-dom'
 import "./Login.css";
+import withErrorHandler from '../../hoc/withErrorHandle/withErrorHandle'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import * as action from '../../store/action'
+
 
 class Login extends Component {
   state = {
@@ -13,7 +17,7 @@ class Login extends Component {
   };
 
   componentDidMount() {
-    this.props.setUser(null);
+    this.props.logout();
   }
 
   validateForm() {
@@ -28,22 +32,10 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    if (this.state.login) {
-      axios.post('/auth/jwt-api-token/', { password: this.state.password, username: this.state.username })
-        .then(res => {
-          console.log(res.body);
-          this.props.setUser({ email: this.state.email, password: this.state.password, username: this.state.username, token: res.body })
-        }
-        )
-        .catch(err => console.log(err));
-    }
-    axios.post('/auth/register/', { email: this.state.email, password: this.state.password, username: this.state.username })
-      .then(res => {
-        console.log(res.body);
-        this.props.setUser({ email: this.state.email, password: this.state.password, username: this.state.username, token: res.body })
-      }
-      )
-      .catch(err => console.log(err));
+    if (this.state.login) 
+      this.props.login();
+    else
+      this.props.register();
     this.props.history.push('/');
   }
 
@@ -99,4 +91,18 @@ class Login extends Component {
   }
 }
 
-export default withRouter(Login);
+const mapStateToProps = state => {
+  return {
+      currentUser: state.currentUser,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      login: (user) => dispatch(action.login(user)),
+      logout: () => dispatch(action.logout()),
+      register: (user) => dispatch(action.register(user))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(withRouter(Login), axios));

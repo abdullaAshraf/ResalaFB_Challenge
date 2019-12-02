@@ -9,19 +9,19 @@ const category = (props) => {
         classes.push('CategoryActive')
 
     let icon = faTag;
-    if (props.name === 'All')
+    if (props.category.name === 'All')
         icon = faAsterisk;
-    else if (props.name === 'Trash')
+    else if (props.category.name === 'Trash')
         icon = faTrash;
-    else if (props.name === 'New')
+    else if (props.category.name === 'New')
         icon = faEye;
-    else if (props.name === 'Spam')
+    else if (props.category.name === 'Spam')
         icon = faExclamationTriangle;
         
     return (
-        <div className={classes.join(' ')} onClick={() => props.updateActiveCategory(props.name)}>
+        <div className={classes.join(' ')} onClick={() => props.updateActiveCategory(props.category)}>
             <FontAwesomeIcon icon={icon} className='CategoryIcon col-3' />
-            <span className='col-9'>{props.name}</span>
+            <span className='col-9'>{props.category.name}</span>
         </div>
     );
 }

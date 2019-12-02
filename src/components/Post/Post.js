@@ -1,6 +1,7 @@
 class Post {
-    link;
-    content;
+    url;
+    permalink_url;
+    message;
     category;
     createDate;
     editDate;

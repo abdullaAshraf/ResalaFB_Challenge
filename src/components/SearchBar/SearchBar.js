@@ -11,7 +11,7 @@ const searchBar = (props) => {
     }
 
     const onListenForEnter = (e) => {
-        if(e.which == 13){
+        if(e.which === 13){
             props.onSearch(searchQuery)
         }
     }

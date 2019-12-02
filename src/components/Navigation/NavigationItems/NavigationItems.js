@@ -6,7 +6,7 @@ const navigationItems = () => (
     <ul className="NavigationItems">
         <NavLink to="/" exact>Posts</NavLink>
         <NavLink to="/roles">Roles</NavLink>
-        <NavLink to="/login">Signout</NavLink>
+        <NavLink to="/login">Logout</NavLink>
     </ul>
 );
 

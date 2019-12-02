@@ -1,51 +1,70 @@
 import React, { Component } from 'react';
 import RoleTile from '../RoleTile/RoleTile';
 import './Roles.css';
-import Shortid from 'short-id'
+import withErrorHandler from '../../hoc/withErrorHandle/withErrorHandle'
+import axios from 'axios'
+import { connect } from 'react-redux'
+import * as action from '../../store/action'
 
 class Roles extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            roles: props.roles,
-            activeUser: props.activeUser,
-            categories: props.categories
-        };
+    state = {
+        newRoleName: ''
     }
 
-    editRole = (newRole) => {
-        //TODO update role
-        this.setState((prevState) => {
-            let newRoles = prevState.roles.map(role => { return { ...role } });
-            newRoles.map(role => {
-                if (role.name === newRole.name)
-                    return newRole;
-                else
-                    return { ...role };
-            });
-            return {
-                roles: newRoles
-            }
+    componentDidMount() {
+        this.props.loadRoles();
+        this.props.loadCategories();
+    }
+
+    nameChanged = (e) => {
+        this.setState({
+            newRoleName: e.target.value
         })
     }
 
-    deleteRole = (newRole) => {
-        this.setState((prevState) => { prevState.rolesfilter(role => role.name !== newRole.name) });
+    addRole = () => {
+        this.props.addRole(this.state.newRoleName);
+        this.setState({
+            newRoleName: ''
+        })
+    }
+
+    getCurrUserRank = () => {
+        const rolesList = this.props.currentUser.roles.split(',');
+        let rank = 0
+        this.props.roles.forEach(role => {
+            if (rolesList.indexOf(role.url.split('/')[4]) >= 0)
+                rank = Math.max(rank, role.rank)
+        });
+        return rank
     }
 
     render() {
         return (
             <div>
-                {this.state.roles.map(role => <RoleTile key={Shortid.generate()} role={role} categories={this.state.categories} deleteRole={this.deleteRole} editRole={this.editRole} />)}
+                {this.props.roles.filter(role => role.rank <= this.getCurrUserRank()).map(role => <RoleTile key={role.url} role={role} />)}
+                <input className="MainInput" type="text" onChange={this.nameChanged} value={this.state.newRoleName} />
+                <button className="btn btn-primary" onClick={this.addRole}>Add Role</button>
             </div>
+
         );
     }
 }
 
-function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
+const mapStateToProps = state => {
+    return {
+        currentUser: state.currentUser,
+        roles: state.roles,
+    }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        loadCategories: () => dispatch(action.getCategories()),
+        loadRoles: () => dispatch(action.getRoles()),
+        addRole: (role) => dispatch(action.addRole(role))
+    }
+}
 
-export default Roles;
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Roles, axios));
