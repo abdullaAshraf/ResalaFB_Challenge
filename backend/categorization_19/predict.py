@@ -72,7 +72,3 @@ def predict_category(post_content: str) -> str:
 	content_cleaned = clean_str(post_content)
 	category = prediction(content_cleaned)
 	return category
-
-
-print(predict_category('عندي كتب ثانوية عامة للي محتاجهم'))
-print(predict_category('لو في دكتور عظام يطمني على نتيجة الاشعة'))
